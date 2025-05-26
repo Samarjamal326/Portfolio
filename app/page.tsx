@@ -34,7 +34,7 @@ export default function Page() {
               <Link href="#globe" className="transition-colors hover:text-foreground/80">
                 Tech Globe
               </Link>
-              <Link href="/career-skills" className="transition-colors hover:text-foreground/80">
+              <Link href="/pese-400" className="transition-colors hover:text-foreground/80">
                 PESE 400
               </Link>
               <Link href="#contact" className="transition-colors hover:text-foreground/80">
