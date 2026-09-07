@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useState } from "react"
 import { submitContactForm } from "../actions"
-import { motion } from "framer-motion"
 
 export default function ContactForm() {
   const [pending, setPending] = useState(false)
@@ -25,14 +24,8 @@ export default function ContactForm() {
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-    >
-      <Card className="p-6">
-        <form action={handleSubmit} className="space-y-4">
+    <Card className="p-6">
+      <form action={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium mb-2">
               Name
@@ -55,8 +48,7 @@ export default function ContactForm() {
             {pending ? "Sending..." : "Send Message"}
           </Button>
           {message && <p className="text-sm text-center mt-4 text-muted-foreground">{message}</p>}
-        </form>
-      </Card>
-    </motion.div>
+      </form>
+    </Card>
   )
 }
