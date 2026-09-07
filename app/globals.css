@@ -80,3 +80,12 @@ html {
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

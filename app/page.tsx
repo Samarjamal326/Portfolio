@@ -37,6 +37,9 @@ export default function Page() {
               <Link href="/pese-400" className="transition-colors hover:text-foreground/80">
                 PESE 400
               </Link>
+              <Link href="/pese-600" className="transition-colors hover:text-foreground/80">
+                PESE 600
+              </Link>
               <Link href="#contact" className="transition-colors hover:text-foreground/80">
                 Contact
               </Link>
@@ -44,7 +47,7 @@ export default function Page() {
           </div>
           <div className="ml-auto flex items-center gap-2">
             <ThemeToggle />
-            <Link href="/resume.pdf" target="_blank">
+            <Link href="/resume">
               <Button variant="outline">Resume</Button>
             </Link>
           </div>
@@ -60,7 +63,7 @@ export default function Page() {
                   <TypingAnimation text="AI DEVELOPER" className="inline-block" speed={80} />
                 </h1>
                 <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                  Hi! I'm Samar, a second-year CS + AI/ML student, obsessed with building real-world AI solutions that
+                  Hi! I'm Samar, a third-year CS + AI/ML student, obsessed with building real-world AI solutions that
                   go beyond just theory.
                 </p>
               </div>
@@ -98,8 +101,8 @@ export default function Page() {
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">About Me</h2>
             <div className="mx-auto max-w-3xl text-center">
-              <p className="text-lg mb-6">
-                I'm a second-year CS + AI/ML student. Obsessed with building real-world AI solutions that go beyond just
+              <p className="text-gray-500 dark:text-gray-400 mb-6">
+                I'm a third-year CS + AI/ML student. Obsessed with building real-world AI solutions that go beyond just
                 theory. From gesture-controlled tech to donation platforms — I bring ideas to life using Python, C, and
                 machine learning frameworks.
               </p>
