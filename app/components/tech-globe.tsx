@@ -419,29 +419,79 @@ export default function TechGlobe() {
   const [selectedTech, setSelectedTech] = useState<any>(null)
   const [rotation, setRotation] = useState({ x: 0, y: 0 })
   const [autoRotate, setAutoRotate] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const globeRef = useRef<HTMLDivElement>(null)
   const { resolvedTheme } = useTheme()
   const isDark = resolvedTheme === "dark"
+  const lastFrameTimeRef = useRef<number>(0)
+  const animationFrameRef = useRef<number | null>(null)
 
-  // Generate points on the sphere
-  const points = fibonacciSphere(technologies.length)
-
-  // Generate wireframe
-  const wireframe = generateWireframe(150, 12)
-
-  // Auto-rotation effect
+  // Check if mobile and set up IntersectionObserver
   useEffect(() => {
-    if (!autoRotate) return
+    setIsMobile(window.innerWidth < 768)
 
-    const interval = setInterval(() => {
-      setRotation((prev) => ({
-        x: prev.x,
-        y: prev.y + 0.5,
-      }))
-    }, 50)
+    // IntersectionObserver for lazy initialization
+    if (globeRef.current) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            setIsVisible(entry.isIntersecting)
+          })
+        },
+        { threshold: 0.1 }
+      )
 
-    return () => clearInterval(interval)
-  }, [autoRotate])
+      observer.observe(globeRef.current)
+
+      return () => {
+        if (globeRef.current) {
+          observer.unobserve(globeRef.current)
+        }
+      }
+    }
+  }, [])
+
+  // Generate points on the sphere (reduced for mobile)
+  const points = fibonacciSphere(isMobile ? 8 : technologies.length)
+
+  // Generate wireframe with reduced segments for performance
+  const wireframe = generateWireframe(150, isMobile ? 8 : 12)
+
+  // Auto-rotation effect with frame rate capping (30fps)
+  useEffect(() => {
+    if (!autoRotate || isMobile || !isVisible) {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
+      }
+      return
+    }
+
+    const targetFrameTime = 1000 / 30 // 30fps
+
+    const animate = (currentTime: number) => {
+      if (lastFrameTimeRef.current && currentTime - lastFrameTimeRef.current >= targetFrameTime) {
+        setRotation((prev) => ({
+          x: prev.x,
+          y: prev.y + 0.5,
+        }))
+        lastFrameTimeRef.current = currentTime
+      } else if (!lastFrameTimeRef.current) {
+        lastFrameTimeRef.current = currentTime
+      }
+
+      animationFrameRef.current = requestAnimationFrame(animate)
+    }
+
+    animationFrameRef.current = requestAnimationFrame(animate)
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
+      }
+    }
+  }, [autoRotate, isMobile, isVisible])
 
   // Handle manual rotation with mouse drag
   useEffect(() => {
@@ -528,7 +578,7 @@ export default function TechGlobe() {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full" ref={globeRef}>
       <div className="flex flex-col items-center mb-8">
         <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">
           Tech Stack
@@ -538,21 +588,31 @@ export default function TechGlobe() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Left side: Tech Stack Cards */}
+      {isMobile ? (
+        // Mobile: Show flat grid of technology tags
         <div className="space-y-6">
           {Object.entries(techByCategory).map(([category, techs]) => (
             <TechStackCard key={category} category={category} techs={techs} />
           ))}
         </div>
+      ) : (
+        // Desktop: Show globe with cards
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left side: Tech Stack Cards */}
+          <div className="space-y-6">
+            {Object.entries(techByCategory).map(([category, techs]) => (
+              <TechStackCard key={category} category={category} techs={techs} />
+            ))}
+          </div>
 
-        {/* Right side: Interactive Globe */}
-        <Card
-          className={`relative w-full h-[500px] rounded-xl overflow-hidden border border-primary/20 ${
-            isDark ? "bg-gray-900/70" : "bg-gray-50/70"
-          } backdrop-blur-sm`}
-          ref={containerRef}
-        >
+          {/* Right side: Interactive Globe */}
+          <Card
+            className={`relative w-full h-[500px] rounded-xl overflow-hidden border border-primary/20 ${
+              isDark ? "bg-gray-900/70" : "bg-gray-50/70"
+            } backdrop-blur-sm`}
+            ref={containerRef}
+            style={{ willChange: 'transform' }}
+          >
           {/* Globe background with gradient */}
           <div
             className="absolute inset-0 rounded-full opacity-20"
@@ -617,12 +677,13 @@ export default function TechGlobe() {
             {autoRotate ? "Pause Rotation" : "Auto Rotate"}
           </Button>
         </Card>
-      </div>
 
-      {/* Tech details modal */}
-      <AnimatePresence>
-        {selectedTech && <TechDetailsModal tech={selectedTech} onClose={() => setSelectedTech(null)} />}
-      </AnimatePresence>
+        {/* Tech details modal */}
+        <AnimatePresence>
+          {selectedTech && <TechDetailsModal tech={selectedTech} onClose={() => setSelectedTech(null)} />}
+        </AnimatePresence>
+      </div>
+      )}
     </div>
   )
 }

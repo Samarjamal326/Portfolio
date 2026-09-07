@@ -5,16 +5,28 @@ import { motion } from "framer-motion"
 
 const technologies = [
   {
+    category: "AI / ML & Deep Learning",
+    skills: ["PyTorch", "TensorFlow", "Scikit-learn", "Transformers", "Hugging Face", "RAG", "Reinforcement Learning", "EfficientNet", "YOLO", "CUDA AMP"],
+  },
+  {
+    category: "Computer Vision & NLP",
+    skills: ["OpenCV", "NLP", "Edge AI", "TTA"],
+  },
+  {
     category: "Languages",
-    skills: ["Python", "C/C++", "Java", "HTML/CSS"],
+    skills: ["Python", "C", "C++", "Java", "JavaScript"],
   },
   {
-    category: "ML/AI",
-    skills: ["TensorFlow", "PyTorch", "OpenCV", "Scikit-learn", "Pandas", "NumPy"],
+    category: "Web & Backend",
+    skills: ["React", "TypeScript", "Node.js", "FastAPI", "Django", "REST APIs", "HTML", "CSS", "Supabase"],
   },
   {
-    category: "Tools",
-    skills: ["GitHub", "Jupyter", "VS Code", "Google Colab", "Kaggle", "Pycharm", "Intellij"],
+    category: "Databases",
+    skills: ["PostgreSQL", "SQL"],
+  },
+  {
+    category: "Tools & Platforms",
+    skills: ["Git", "Docker", "Vercel", "Jupyter", "Google Colab", "Google Cloud", "AWS"],
   },
 ]
 

@@ -32,6 +32,62 @@ interface Project {
 // Initial project data
 const initialProjects: Project[] = [
   {
+    id: "mediscan-ai",
+    name: "MediScan AI",
+    status: "Deployed",
+    description: "Personalized Healthcare Intelligence Platform | React, TypeScript, Node.js, PostgreSQL, OpenAI API",
+    chartType: "line",
+    chartData: [
+      { name: "Nov", accuracy: 70 },
+      { name: "Dec", accuracy: 78 },
+      { name: "Jan", accuracy: 85 },
+    ],
+    chartLabel: "Model Accuracy (%)",
+    link: "https://github.com/samarcodesinpython/mediscan-ai",
+  },
+  {
+    id: "scene-classification",
+    name: "Scene Classification using EfficientNet-B2",
+    status: "Deployed",
+    description: "Computer Vision classifier on SUN397 dataset with 75% macro F1-score | PyTorch, CUDA AMP, TTA",
+    chartType: "bar",
+    chartData: [
+      { name: "F1-Score", value: 75 },
+      { name: "Accuracy", value: 73 },
+    ],
+    chartLabel: "Performance Metrics",
+    link: "https://github.com/samarcodesinpython/scene-classification",
+  },
+  {
+    id: "disaster-response",
+    name: "AI Disaster Response Coordinator",
+    status: "In Progress",
+    description: "Reinforcement learning for crisis management | FastAPI, Docker, Multi-Agent LLMs",
+    chartType: "line",
+    chartData: [
+      { name: "Week 1", value: 0.65 },
+      { name: "Week 2", value: 0.72 },
+      { name: "Week 3", value: 0.78 },
+      { name: "Week 4", value: 0.884 },
+    ],
+    chartLabel: "Agent Performance",
+    link: "https://github.com/samarcodesinpython/disaster-response",
+  },
+  {
+    id: "senselink",
+    name: "SenseLink - AI-Powered Assistive IoT Platform",
+    status: "In Progress",
+    description: "Real-time object detection & live captioning for visually/hearing-impaired | YOLO, Edge AI, ESP32",
+    chartType: "bar",
+    chartData: [
+      { name: "Vision", value: 85 },
+      { name: "Audio", value: 78 },
+      { name: "Navigation", value: 88 },
+    ],
+    chartLabel: "Feature Accuracy (%)",
+    link: "https://github.com/samarcodesinpython/senselink",
+  },
+  {
     id: "gesture-mouse",
     name: "Gesture-Controlled Mouse",
     status: "Deployed",
@@ -45,7 +101,7 @@ const initialProjects: Project[] = [
       { name: "May", accuracy: 94 },
     ],
     chartLabel: "Accuracy (%)",
-    link: "https://github.com/your-username/gesture-mouse",
+    link: "https://github.com/samarcodesinpython/gesture-mouse",
   },
   {
     id: "donation-platform",
@@ -59,7 +115,7 @@ const initialProjects: Project[] = [
       { name: "Donations", value: 45 },
     ],
     chartLabel: "Current Stats",
-    link: "https://github.com/your-username/ni-swarth",
+    link: "https://github.com/samarcodesinpython/ni-swarth",
   },
   {
     id: "voice-clone",

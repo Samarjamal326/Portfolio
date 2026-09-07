@@ -199,7 +199,7 @@ export default function TechTimeline() {
           {/* Timeline container */}
           <div
             ref={scrollContainerRef}
-            className="flex overflow-x-auto pb-12 pt-4 px-4 hide-scrollbar snap-x"
+            className="flex overflow-x-auto pb-12 pt-4 px-4 snap-x"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             <div className="flex space-x-12 px-8">
@@ -332,11 +332,7 @@ export default function TechTimeline() {
         )}
       </AnimatePresence>
 
-      <style jsx global>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
+
     </div>
   )
 }
