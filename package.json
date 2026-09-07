@@ -25,9 +25,7 @@
     "@radix-ui/react-label": "latest",
     "@radix-ui/react-select": "latest",
     "@radix-ui/react-slot": "latest",
-    "framer-motion": "latest",
     "next-themes": "latest",
-    "recharts": "latest",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
