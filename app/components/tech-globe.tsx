@@ -677,14 +677,12 @@ export default function TechGlobe() {
             {autoRotate ? "Pause Rotation" : "Auto Rotate"}
           </Button>
         </Card>
-      </div>
 
-            {/* Tech details modal */}
-            <AnimatePresence>
-              {selectedTech && <TechDetailsModal tech={selectedTech} onClose={() => setSelectedTech(null)} />}
-            </AnimatePresence>
-          </Card>
-        </div>
+        {/* Tech details modal */}
+        <AnimatePresence>
+          {selectedTech && <TechDetailsModal tech={selectedTech} onClose={() => setSelectedTech(null)} />}
+        </AnimatePresence>
+      </div>
       )}
     </div>
   )
